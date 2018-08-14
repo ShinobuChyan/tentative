@@ -1,49 +1,42 @@
-package com.tentative.common.model.user;
+package com.tentative.core.entity;
 
-import com.alibaba.fastjson.JSON;
-
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-/**
- * 用户相关通用DTO
- *
- * @author Shinobu
- * @since 2018/8/14
- */
-public class UserCommonDTO {
+@Table(name = "user")
+public class User {
 
+    @Id
     private String id;
 
-    @Pattern(regexp = "^(?![0-9]+$)(?![A-z]+$)[0-9A-z]{6,16}$")
     private String username;
 
-    @Pattern(regexp = "^1[0-9]{10}$")
     private String phoneNumber;
 
-    @Pattern(regexp = "^[a-z0-9]+([._\\\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$")
     private String email;
 
     private String type;
 
     private String status;
 
-    @Pattern(regexp = "^([\\u4e00-\\u9fa50-9!_,]{2,9})|([A-z0-9!_,]{2,16})$")
     private String name;
 
-    @Pattern(regexp = "^[0-9A-z!_,]{6,15}$")
     private String password;
+
+    private String dataStatus;
 
     private Date createTime;
 
-    @Size(max = 64)
-    private String captcha;
+    private String creatorId;
 
-    @Override
-    public String toString() {
-        return JSON.toJSONString(this);
-    }
+    private String creatorName;
+
+    private Date updateTime;
+
+    private String updaterId;
+
+    private String updaterName;
 
     public String getId() {
         return id;
@@ -109,6 +102,14 @@ public class UserCommonDTO {
         this.password = password;
     }
 
+    public String getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(String dataStatus) {
+        this.dataStatus = dataStatus;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -117,11 +118,43 @@ public class UserCommonDTO {
         this.createTime = createTime;
     }
 
-    public String getCaptcha() {
-        return captcha;
+    public String getCreatorId() {
+        return creatorId;
     }
 
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdaterId() {
+        return updaterId;
+    }
+
+    public void setUpdaterId(String updaterId) {
+        this.updaterId = updaterId;
+    }
+
+    public String getUpdaterName() {
+        return updaterName;
+    }
+
+    public void setUpdaterName(String updaterName) {
+        this.updaterName = updaterName;
     }
 }
