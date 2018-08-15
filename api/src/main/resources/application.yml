@@ -59,8 +59,15 @@ pagehelper:
   helper-dialect: mysql
   reasonable: true
 
+# 自定义属性
 customized:
+  # redis keys
   redis-key:
+    # 用户令牌
     user-token:
       active: "Tentative:UserToken:Active:"
       inactive: "Tentative:UserToken:Inactive:"
+    # 验证码
+    captcha:
+      mobile:
+        common: "Tentative:Captcha:Mobile:Common:"

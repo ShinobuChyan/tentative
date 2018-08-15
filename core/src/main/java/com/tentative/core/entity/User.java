@@ -1,16 +1,26 @@
 package com.tentative.core.entity;
 
+import com.tentative.common.util.CommonUtil;
+import com.tentative.core.model.user.UserDesensitizedVO;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
+/**
+ * @author Shinobu
+ */
 @Table(name = "user")
 public class User {
 
     @Id
     private String id;
 
-    private String username;
+    private String profileId;
+
+    private String profilePicId;
+
+    private String defaultAddressId;
 
     private String phoneNumber;
 
@@ -20,7 +30,7 @@ public class User {
 
     private String status;
 
-    private String name;
+    private String nickname;
 
     private String password;
 
@@ -38,6 +48,12 @@ public class User {
 
     private String updaterName;
 
+    public UserDesensitizedVO desensitize() {
+        UserDesensitizedVO vo = new UserDesensitizedVO();
+        CommonUtil.attrTransfer(this, vo);
+        return vo;
+    }
+
     public String getId() {
         return id;
     }
@@ -46,12 +62,28 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getProfileId() {
+        return profileId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setProfileId(String profileId) {
+        this.profileId = profileId;
+    }
+
+    public String getProfilePicId() {
+        return profilePicId;
+    }
+
+    public void setProfilePicId(String profilePicId) {
+        this.profilePicId = profilePicId;
+    }
+
+    public String getDefaultAddressId() {
+        return defaultAddressId;
+    }
+
+    public void setDefaultAddressId(String defaultAddressId) {
+        this.defaultAddressId = defaultAddressId;
     }
 
     public String getPhoneNumber() {
@@ -86,12 +118,12 @@ public class User {
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {

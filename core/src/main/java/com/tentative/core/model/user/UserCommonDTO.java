@@ -1,4 +1,4 @@
-package com.tentative.common.model.user;
+package com.tentative.core.model.user;
 
 import com.alibaba.fastjson.JSON;
 
@@ -16,9 +16,6 @@ public class UserCommonDTO {
 
     private String id;
 
-    @Pattern(regexp = "^(?![0-9]+$)(?![A-z]+$)[0-9A-z]{6,16}$")
-    private String username;
-
     @Pattern(regexp = "^1[0-9]{10}$")
     private String phoneNumber;
 
@@ -30,7 +27,7 @@ public class UserCommonDTO {
     private String status;
 
     @Pattern(regexp = "^([\\u4e00-\\u9fa50-9!_,]{2,9})|([A-z0-9!_,]{2,16})$")
-    private String name;
+    private String nickname;
 
     @Pattern(regexp = "^[0-9A-z!_,]{6,15}$")
     private String password;
@@ -51,14 +48,6 @@ public class UserCommonDTO {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPhoneNumber() {
@@ -93,12 +82,12 @@ public class UserCommonDTO {
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {
