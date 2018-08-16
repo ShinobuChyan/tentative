@@ -25,17 +25,17 @@
         creator_id, creator_name, update_time, updater_id, updater_name
     </sql>
 
-    <select id="countNicknameInAvailable" resultType="java.lang.Integer">
-        select count(*)
-        from user
-        where nickname = #{nickname}
-          and data_status = '0'
-    </select>
-
     <select id="countPhoneNumberInAvailable" resultType="java.lang.Integer">
         select count(*)
         from user
         where phone_number = #{phoneNumber}
+          and data_status = '0'
+    </select>
+
+    <select id="countNicknameInAvailable" resultType="java.lang.Integer">
+        select count(*)
+        from user
+        where nickname = #{nickname}
           and data_status = '0'
     </select>
 

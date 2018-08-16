@@ -27,7 +27,7 @@ public class UserPeripheryServiceImpl implements UserPeripheryService {
      */
     @Override
     public boolean isPhoneNumberAvailable(@NotNull String phoneNumber) {
-        return mappers.userMapper.countNicknameInAvailable(phoneNumber) < 1;
+        return mappers.userMapper.countPhoneNumberInAvailable(phoneNumber) < 1;
     }
 
     /**

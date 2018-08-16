@@ -37,7 +37,7 @@ public class ControllerAdviser {
         }
         // 断言失败
         if (e instanceof AssertFailedException) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.warn("[断言失败] msg: " + e.getMessage());
             return CommonResult.newFailedResult(e.getMessage(), null, CommonResultCode.BAD_REQUEST);
         }
         // api入参校验失败
@@ -45,6 +45,7 @@ public class ControllerAdviser {
             List<String> errorMsg = ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors().stream()
                     .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
                     .collect(Collectors.toList());
+            LOGGER.warn("[api入参校验失败] msg: " + errorMsg);
             return CommonResult.newFailedResult("参数校验失败", errorMsg, CommonResultCode.BAD_REQUEST);
         }
         // 业务控制抛错

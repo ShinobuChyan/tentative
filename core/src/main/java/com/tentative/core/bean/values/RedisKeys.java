@@ -20,7 +20,7 @@ public class RedisKeys {
     @Autowired
     RedisKeys(@Value("${customized.redis-key.user-token.active}") String activeUserTokenKey,
               @Value("${customized.redis-key.user-token.inactive}") String inactiveUserTokenKey,
-              @Value("${customized.redis-key.captcha.mobile.default}") String commonMobileCaptchaKey) {
+              @Value("${customized.redis-key.captcha.mobile.common}") String commonMobileCaptchaKey) {
         this.activeUserTokenKey = activeUserTokenKey;
         this.inactiveUserTokenKey = inactiveUserTokenKey;
         this.commonMobileCaptchaKey = commonMobileCaptchaKey;
