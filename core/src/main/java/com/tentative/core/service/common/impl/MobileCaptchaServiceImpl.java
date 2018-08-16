@@ -5,6 +5,8 @@ import com.tentative.common.exception.RestRuntimeException;
 import com.tentative.core.bean.Values;
 import com.tentative.core.model.common.MobileCaptchaEntity;
 import com.tentative.core.service.common.MobileCaptchaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class MobileCaptchaServiceImpl implements MobileCaptchaService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MobileCaptchaServiceImpl.class);
 
     /**
      * 默认验证码最小发送间隔，60秒
@@ -68,6 +72,7 @@ public class MobileCaptchaServiceImpl implements MobileCaptchaService {
         });
         MobileCaptchaEntity newEntity = new MobileCaptchaEntity(captcha, new Date());
         stringRedisTemplate.opsForValue().set(values.redisKeys.commonMobileCaptchaKey + phoneNumber, newEntity.toString(), 10, TimeUnit.MINUTES);
+        LOGGER.info("[通用短信验证码] phoneNumber: " + phoneNumber + "，captcha: " + captcha);
     }
 
     /**

@@ -27,4 +27,12 @@ public interface UserMapper extends BaseMapper<User> {
      */
     int countNicknameInAvailable(@Param("nickname") String nickname);
 
+    /**
+     * 新增用户记录
+     *
+     * @param user user
+     * @return insert count
+     */
+    int insertCorrectly(User user);
+
 }

@@ -41,7 +41,7 @@ public class UserController {
         Assert.notNull(dto.getPhoneNumber(), dto.getCaptcha(), dto.getNickname());
         mobileCaptchaService.consumeCommonCaptcha(dto.getPhoneNumber(), dto.getCaptcha());
         User user = userService.regByCaptcha(dto.getPhoneNumber(), dto.getNickname());
-        return CommonResult.newSuccessResult("注册成功", user.desensitize(), null);
+        return CommonResult.newSuccessResult("注册成功", user.desensitization(), null);
     }
 
 }

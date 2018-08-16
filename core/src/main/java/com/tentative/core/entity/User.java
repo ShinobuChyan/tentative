@@ -48,7 +48,10 @@ public class User {
 
     private String updaterName;
 
-    public UserDesensitizedVO desensitize() {
+    /**
+     * @return 脱敏后的结构
+     */
+    public UserDesensitizedVO desensitization() {
         UserDesensitizedVO vo = new UserDesensitizedVO();
         CommonUtil.attrTransfer(this, vo);
         return vo;

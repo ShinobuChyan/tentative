@@ -32,11 +32,26 @@
           and data_status = '0'
     </select>
 
-    <select id="countNicknameInAvailable" resultType="java.lang.Integer">
+    <select id="countNicknameInAvailable" resultType="int">
         select count(*)
         from user
         where nickname = #{nickname}
           and data_status = '0'
     </select>
+
+    <insert id="insertCorrectly" parameterType="object">
+        INSERT INTO USER (id, profile_id, phone_number, type, STATUS, nickname, creator_id, creator_name)
+        SELECT #{id},
+               #{profileId},
+               #{phoneNumber},
+               #{type},
+               #{status},
+               #{nickname},
+               #{creatorId},
+               #{creatorName}
+        FROM user
+        WHERE
+            (SELECT count(*) FROM `user` WHERE phone_number = #{phoneNumber} OR nickname = #{nickname}) &lt; 1
+    </insert>
 
 </mapper>
