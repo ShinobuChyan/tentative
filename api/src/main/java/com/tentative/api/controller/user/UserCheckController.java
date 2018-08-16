@@ -1,7 +1,7 @@
 package com.tentative.api.controller.user;
 
 import com.tentative.common.model.CommonResult;
-import com.tentative.core.service.user.UserPeripheryService;
+import com.tentative.api.service.user.UserPeripheryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

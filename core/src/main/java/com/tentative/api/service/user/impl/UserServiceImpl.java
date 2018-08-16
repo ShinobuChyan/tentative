@@ -1,18 +1,17 @@
-package com.tentative.core.service.user.impl;
+package com.tentative.api.service.user.impl;
 
+import com.tentative.api.service.user.UserPeripheryService;
+import com.tentative.api.service.user.UserService;
 import com.tentative.common.constant.StatusConstant;
 import com.tentative.common.constant.TypeConstant;
 import com.tentative.common.constant.ValueConstant;
 import com.tentative.common.exception.RestRuntimeException;
 import com.tentative.core.bean.Mappers;
 import com.tentative.core.entity.User;
-import com.tentative.core.service.user.UserPeripheryService;
-import com.tentative.core.service.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
-import java.util.Map;
 import java.util.UUID;
 
 /**

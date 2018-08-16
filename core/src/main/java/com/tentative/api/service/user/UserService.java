@@ -1,4 +1,4 @@
-package com.tentative.core.service.user;
+package com.tentative.api.service.user;
 
 import com.tentative.core.entity.User;
 

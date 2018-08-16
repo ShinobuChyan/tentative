@@ -49,9 +49,11 @@
                #{nickname},
                #{creatorId},
                #{creatorName}
-        FROM user
+        FROM dual
         WHERE
-            (SELECT count(*) FROM `user` WHERE phone_number = #{phoneNumber} OR nickname = #{nickname}) &lt; 1
+            (SELECT count(*) FROM `user` WHERE phone_number = #{phoneNumber}) &lt; 1
+        and
+            (SELECT count(*) FROM `user` WHERE nickname = #{nickname}) &lt; 1
     </insert>
 
 </mapper>
