@@ -1,5 +1,8 @@
 package com.tentative.core.service.user;
 
+import com.tentative.core.entity.User;
+import org.springframework.lang.Nullable;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -9,6 +12,14 @@ import javax.validation.constraints.NotNull;
  * @since 2018/8/15
  */
 public interface UserPeripheryService {
+
+    /**
+     * 根据用户ID查询
+     *
+     * @param userId 用户ID
+     * @return user
+     */
+    @Nullable User getAvailableByUserId(@NotNull String userId);
 
     /**
      * 检查手机号是否可用

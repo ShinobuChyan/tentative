@@ -31,7 +31,7 @@ public class UserController {
     }
 
     /**
-     * 用户注册
+     * 用户注册 - 验证码
      *
      * @param dto dto
      * @return userInfo
@@ -42,6 +42,15 @@ public class UserController {
         mobileCaptchaService.consumeCommonCaptcha(dto.getPhoneNumber(), dto.getCaptcha());
         User user = userService.regByCaptcha(dto.getPhoneNumber(), dto.getNickname());
         return CommonResult.newSuccessResult("注册成功", user.desensitization(), null);
+    }
+
+    /**
+     * 登陆 - 验证码
+     * @param dto dto
+     * @return userInfo
+     */
+    public CommonResult loginByCaptcha(@RequestBody @Validated UserCommonDTO dto) {
+        return null;
     }
 
 }

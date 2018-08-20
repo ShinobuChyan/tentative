@@ -43,7 +43,7 @@ public class TokenServiceImpl implements TokenService {
         Date iat = new Date();
         // 过期时间，15天
         Date exp = new Date(iat.getTime() + (1000 * 60 * 60 * 24 * 15));
-        Map<String, Object> claims = new HashMap<>(2, 1);
+        Map<String, Object> claims = new HashMap<>(4);
         claims.put("userId", userId);
         claims.put("imei", imei);
 

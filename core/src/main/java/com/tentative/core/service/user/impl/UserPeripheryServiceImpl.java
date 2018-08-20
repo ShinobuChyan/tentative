@@ -1,7 +1,9 @@
 package com.tentative.core.service.user.impl;
 
+import com.tentative.core.entity.User;
 import com.tentative.core.service.user.UserPeripheryService;
 import com.tentative.core.bean.Mappers;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +20,18 @@ public class UserPeripheryServiceImpl implements UserPeripheryService {
 
     @Resource
     private Mappers mappers;
+
+    /**
+     * 根据用户ID查询
+     *
+     * @param userId 用户ID
+     * @return user
+     */
+    @Override
+    public @Nullable
+    User getAvailableByUserId(@NotNull String userId) {
+        return mappers.userMapper.selectAvailableById(userId);
+    }
 
     /**
      * 检查手机号是否可用

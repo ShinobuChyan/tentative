@@ -50,10 +50,16 @@
                #{creatorId},
                #{creatorName}
         FROM dual
-        WHERE
-            (SELECT count(*) FROM `user` WHERE phone_number = #{phoneNumber}) &lt; 1
-        and
-            (SELECT count(*) FROM `user` WHERE nickname = #{nickname}) &lt; 1
+        WHERE (SELECT count(*) FROM `user` WHERE phone_number = #{phoneNumber}) &lt; 1
+          and (SELECT count(*) FROM `user` WHERE nickname = #{nickname}) &lt; 1
     </insert>
+
+    <select id="selectAvailableById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id = #{id}
+        and data_status = '0'
+    </select>
 
 </mapper>

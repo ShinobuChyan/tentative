@@ -3,6 +3,7 @@ package com.tentative.core.dao.mapper;
 import com.tentative.core.dao.BaseMapper;
 import com.tentative.core.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -34,5 +35,13 @@ public interface UserMapper extends BaseMapper<User> {
      * @return insert count
      */
     int insertCorrectly(User user);
+
+    /**
+     * （在非逻辑删除的数据中）根据ID查询
+     *
+     * @param id 用户ID
+     * @return user
+     */
+    @Nullable User selectAvailableById(String id);
 
 }
