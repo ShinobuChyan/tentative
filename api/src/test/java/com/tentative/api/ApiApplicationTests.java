@@ -1,6 +1,6 @@
 package com.tentative.api;
 
-import com.tentative.api.service.user.UserService;
+import com.tentative.core.service.user.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

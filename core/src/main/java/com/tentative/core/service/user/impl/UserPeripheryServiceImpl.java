@@ -1,6 +1,6 @@
-package com.tentative.api.service.user.impl;
+package com.tentative.core.service.user.impl;
 
-import com.tentative.api.service.user.UserPeripheryService;
+import com.tentative.core.service.user.UserPeripheryService;
 import com.tentative.core.bean.Mappers;
 import org.springframework.stereotype.Service;
 

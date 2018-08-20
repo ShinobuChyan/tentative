@@ -1,4 +1,4 @@
-package com.tentative.api.service.user;
+package com.tentative.core.service.user;
 
 import javax.validation.constraints.NotNull;
 

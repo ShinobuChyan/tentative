@@ -1,7 +1,7 @@
-package com.tentative.api.service.user.impl;
+package com.tentative.core.service.user.impl;
 
-import com.tentative.api.service.user.UserPeripheryService;
-import com.tentative.api.service.user.UserService;
+import com.tentative.core.service.user.UserPeripheryService;
+import com.tentative.core.service.user.UserService;
 import com.tentative.common.constant.StatusConstant;
 import com.tentative.common.constant.TypeConstant;
 import com.tentative.common.constant.ValueConstant;
@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
 
         User newUser = new User();
         newUser.setId(UUID.randomUUID().toString());
-        newUser.setProfileId(UUID.randomUUID().toString());
         newUser.setPhoneNumber(phoneNumber);
         newUser.setType(TypeConstant.USER_TYPE_NORMAL);
         newUser.setStatus(StatusConstant.USER_STATUS_NORMAL);
@@ -57,7 +56,6 @@ public class UserServiceImpl implements UserService {
         if (i != 1) {
             throw new RestRuntimeException("注册失败");
         }
-        // TODO insert profile info
         return newUser;
     }
 }

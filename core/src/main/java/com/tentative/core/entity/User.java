@@ -16,8 +16,6 @@ public class User {
     @Id
     private String id;
 
-    private String profileId;
-
     private String profilePicId;
 
     private String defaultAddressId;
@@ -31,6 +29,8 @@ public class User {
     private String status;
 
     private String nickname;
+
+    private String sex;
 
     private String password;
 
@@ -65,12 +65,12 @@ public class User {
         this.id = id;
     }
 
-    public String getProfileId() {
-        return profileId;
+    public String getSex() {
+        return sex;
     }
 
-    public void setProfileId(String profileId) {
-        this.profileId = profileId;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getProfilePicId() {

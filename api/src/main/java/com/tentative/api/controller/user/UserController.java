@@ -5,7 +5,7 @@ import com.tentative.core.entity.User;
 import com.tentative.core.model.user.UserCommonDTO;
 import com.tentative.common.util.Assert;
 import com.tentative.core.service.common.MobileCaptchaService;
-import com.tentative.api.service.user.UserService;
+import com.tentative.core.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
