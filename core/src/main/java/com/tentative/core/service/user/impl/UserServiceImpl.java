@@ -1,6 +1,6 @@
 package com.tentative.core.service.user.impl;
 
-import com.tentative.core.service.user.UserPeripheryService;
+import com.tentative.core.service.user.UserPeripheralService;
 import com.tentative.core.service.user.UserService;
 import com.tentative.common.constant.StatusConstant;
 import com.tentative.common.constant.TypeConstant;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private Mappers mappers;
 
     @Resource
-    private UserPeripheryService userPeripheryService;
+    private UserPeripheralService userPeripheralService;
 
     /**
      * 用户注册 -> 通过手机验证码
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User regByCaptcha(@NotNull String phoneNumber, @NotNull String nickname) {
 
-        if (!userPeripheryService.isPhoneNumberAvailable(phoneNumber) || !userPeripheryService.isNicknameAvailable(nickname)) {
+        if (!userPeripheralService.isPhoneNumberAvailable(phoneNumber) || !userPeripheralService.isNicknameAvailable(nickname)) {
             throw new RestRuntimeException("手机号或昵称不可用");
         }
 

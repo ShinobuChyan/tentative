@@ -22,6 +22,11 @@ public class CommonResultCode {
     public final static String BAD_REQUEST = "1400";
 
     /**
+     * 失败 - 访问拒绝
+     */
+    public final static String FORBIDDEN = "1403";
+
+    /**
      * 失败 - redis连接超时
      */
     public final static String TIME_OUT = "1408";

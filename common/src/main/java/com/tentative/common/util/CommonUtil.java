@@ -48,7 +48,7 @@ public class CommonUtil {
     }
 
     /**
-     * 获取当前网络ip
+     * 获取当前请求ip
      *
      * 网上抄来的
      */

@@ -22,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class TokenServiceImpl implements TokenService {
 
+    public final static int DEFAULT_TOKEN_EXP = 1000 * 60 * 60 * 24 * 15;
+
     private final static String SIGN_KEY_DEFAULT = "Shinobu NO.1";
 
     @Resource
@@ -42,7 +44,7 @@ public class TokenServiceImpl implements TokenService {
         // 签发时间
         Date iat = new Date();
         // 过期时间，15天
-        Date exp = new Date(iat.getTime() + (1000 * 60 * 60 * 24 * 15));
+        Date exp = new Date(iat.getTime() + DEFAULT_TOKEN_EXP);
         Map<String, Object> claims = new HashMap<>(4);
         claims.put("userId", userId);
         claims.put("imei", imei);

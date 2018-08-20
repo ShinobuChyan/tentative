@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author Shinobu
  * @since 2018/8/15
  */
-public interface UserPeripheryService {
+public interface UserPeripheralService {
 
     /**
      * 根据用户ID查询

@@ -1,7 +1,7 @@
 package com.tentative.core.service.user.impl;
 
 import com.tentative.core.entity.User;
-import com.tentative.core.service.user.UserPeripheryService;
+import com.tentative.core.service.user.UserPeripheralService;
 import com.tentative.core.bean.Mappers;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
  * @since 2018/8/15
  */
 @Service
-public class UserPeripheryServiceImpl implements UserPeripheryService {
+public class UserPeripheralServiceImpl implements UserPeripheralService {
 
     @Resource
     private Mappers mappers;

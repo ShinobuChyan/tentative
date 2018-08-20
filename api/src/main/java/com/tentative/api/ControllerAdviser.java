@@ -2,11 +2,15 @@ package com.tentative.api;
 
 import com.tentative.common.constant.CommonResultCode;
 import com.tentative.common.exception.AssertFailedException;
+import com.tentative.common.exception.RequestRefusedException;
 import com.tentative.common.exception.RestRuntimeException;
 import com.tentative.common.model.CommonResult;
+import com.tentative.common.util.RequestThreadLocal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.RedisConnectionFailureException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,10 +34,11 @@ public class ControllerAdviser {
 
         LOGGER.error("[ExceptionHandler] caught: ", e);
 
-        // Redis连接超时
-        if (e instanceof RedisConnectionFailureException) {
-            LOGGER.warn("[Redis连接超时]: " + e.getMessage());
-            return CommonResult.newFailedResult("网络延迟，请稍后重试", null, CommonResultCode.TIME_OUT);
+        // 访问拒绝
+        if (e instanceof RequestRefusedException) {
+            LOGGER.warn("[访问拒绝] info: " + RequestThreadLocal.detail());
+            LOGGER.warn("[访问拒绝] msg : " + e.getMessage());
+            return CommonResult.newFailedResult(e.getMessage(), null, CommonResultCode.FORBIDDEN);
         }
         // 断言失败
         if (e instanceof AssertFailedException) {
@@ -51,6 +56,11 @@ public class ControllerAdviser {
         // 业务控制抛错
         if (e instanceof RestRuntimeException) {
             return CommonResult.newFailedResult(e.getMessage(), ((RestRuntimeException) e).getData(), null);
+        }
+        // Redis连接超时
+        if (e instanceof RedisConnectionFailureException) {
+            LOGGER.warn("[Redis连接超时]: " + e.getMessage());
+            return CommonResult.newFailedResult("网络延迟，请稍后重试", null, CommonResultCode.TIME_OUT);
         }
 
         return CommonResult.newFailedResult("系统错误，请联系相关人员", null, CommonResultCode.INTERNAL_SERVER_ERROR);
