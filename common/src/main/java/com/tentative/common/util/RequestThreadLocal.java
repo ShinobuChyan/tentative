@@ -3,6 +3,7 @@ package com.tentative.common.util;
 import com.alibaba.fastjson.JSON;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 public class RequestThreadLocal {
 
-    private final static ThreadLocal<Map<String, Object>> INFO = new ThreadLocal<>();
+    private final static ThreadLocal<HashMap<String, Object>> INFO = new ThreadLocal<>();
 
     /**
      * 初始化
@@ -25,15 +26,20 @@ public class RequestThreadLocal {
         if (INFO.get() != null) {
             throw new RuntimeException("[RequestThreadLocal] info has been initialized");
         }
-        Map<String, Object> infoMap = new LinkedHashMap<>(32);
+        LinkedHashMap<String, Object> infoMap = new LinkedHashMap<>(32);
         infoMap.put("url", url);
         INFO.set(infoMap);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Map<String, Object> detail() {
+        return (Map<String, Object>) INFO.get().clone();
     }
 
     /**
      * @return 内容详情
      */
-    public static String detail() {
+    public static String stringDetail() {
         return JSON.toJSONString(INFO.get());
     }
 

@@ -9,8 +9,6 @@ import com.tentative.common.util.RequestThreadLocal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.RedisConnectionFailureException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,7 +34,7 @@ public class ControllerAdviser {
 
         // 访问拒绝
         if (e instanceof RequestRefusedException) {
-            LOGGER.warn("[访问拒绝] info: " + RequestThreadLocal.detail());
+            LOGGER.warn("[访问拒绝] info: " + RequestThreadLocal.stringDetail());
             LOGGER.warn("[访问拒绝] msg : " + e.getMessage());
             return CommonResult.newFailedResult(e.getMessage(), null, CommonResultCode.FORBIDDEN);
         }

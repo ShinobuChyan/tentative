@@ -1,5 +1,6 @@
 package com.tentative.core.aop;
 
+import com.tentative.common.util.GrayLogUtil;
 import com.tentative.common.util.RequestThreadLocal;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -10,7 +11,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * controller 相关切面
+ * 日志相关切面
  *
  * @author Shinobu
  * @since 2018/8/20
@@ -18,23 +19,19 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 @Order(0)
-public class ControllerAspect {
+public class CommonLogAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ControllerAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommonLogAspect.class);
 
-    /**
-     * 所有controller方法
-     */
     @Pointcut("execution(* com.tentative.*.controller.*.*.*(..))")
     public void methodPointcut() {}
 
     /**
-     * 执行controller方法前打印、记录日志
+     * 接口访问日志
      */
     @Before("methodPointcut()")
     public void requestLog() {
-        LOGGER.debug("[请求入界] info: " + RequestThreadLocal.detail());
-        // TODO 持久化
+        GrayLogUtil.newAccessLog(RequestThreadLocal.detail());
     }
 
 }

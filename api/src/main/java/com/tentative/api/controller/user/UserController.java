@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.TreeMap;
+
 /**
  * 用户相关 - 核心
  *
@@ -49,6 +51,7 @@ public class UserController {
      * @param dto dto
      * @return userInfo
      */
+    @PostMapping("/login/captcha")
     public CommonResult loginByCaptcha(@RequestBody @Validated UserCommonDTO dto) {
         return null;
     }

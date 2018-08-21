@@ -9,3 +9,9 @@ spring:
     host: localhost
     port: 6379
     password: 5996030ly
+
+customized:
+  # 假设有个grayLog server
+  gray-log:
+    host: www.google.com
+    port: 80
