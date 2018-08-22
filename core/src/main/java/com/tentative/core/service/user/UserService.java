@@ -18,9 +18,11 @@ public interface UserService {
      *
      * @param phoneNumber 手机号
      * @param nickname    昵称
+     * @param deviceType  设备类型
+     * @param pushId      设备消息推送ID
      * @return user
      */
-    User regByCaptcha(@NotNull String phoneNumber, @NotNull String nickname);
+    User regByCaptcha(@NotNull String phoneNumber, @NotNull String nickname, @NotNull DeviceTypeEnum deviceType, @NotNull String pushId);
 
     /**
      * 登录

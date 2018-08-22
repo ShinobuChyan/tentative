@@ -41,9 +41,10 @@ public class UserController {
      */
     @PostMapping("/reg/captcha")
     public CommonResult register(@RequestBody @Validated UserCommonDTO dto) {
-        Assert.notNull(dto.getPhoneNumber(), dto.getCaptcha(), dto.getNickname());
+        Assert.notNull(dto.getPhoneNumber(), dto.getCaptcha(), dto.getNickname(), dto.getDeviceType(), dto.getPushId());
+
         mobileCaptchaService.consumeCommonCaptcha(dto.getPhoneNumber(), dto.getCaptcha());
-        User user = userService.regByCaptcha(dto.getPhoneNumber(), dto.getNickname());
+        User user = userService.regByCaptcha(dto.getPhoneNumber(), dto.getNickname(), dto.getDeviceType(), dto.getPushId());
         return CommonResult.newSuccessResult("注册成功", user.desensitization(), null);
     }
 
@@ -55,6 +56,7 @@ public class UserController {
     @PostMapping("/login/captcha")
     public CommonResult loginByCaptcha(@RequestBody @Validated UserCommonDTO dto) {
         Assert.notNull(dto.getPhoneNumber(), dto.getCaptcha(), dto.getDeviceType(), dto.getPushId());
+
         mobileCaptchaService.consumeCommonCaptcha(dto.getPhoneNumber(), dto.getCaptcha());
         User user = userService.login(dto.getPhoneNumber(), dto.getDeviceType(), dto.getPushId());
         return CommonResult.newSuccessResult("登录成功", user.desensitization(), null);
@@ -66,6 +68,7 @@ public class UserController {
     @GetMapping("/logout")
     public CommonResult logout() {
         Assert.notNull(RequestThreadLocal.getToken());
+
         userService.logout(RequestThreadLocal.getToken());
         return CommonResult.newSuccessResult("登出成功", null, null);
     }

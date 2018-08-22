@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
      * @return user
      */
     @Override
-    public User regByCaptcha(@NotNull String phoneNumber, @NotNull String nickname) {
+    public User regByCaptcha(@NotNull String phoneNumber, @NotNull String nickname, @NotNull DeviceTypeEnum deviceType, @NotNull String pushId) {
 
         if (!userPeripheralService.isPhoneNumberAvailable(phoneNumber) || !userPeripheralService.isNicknameAvailable(nickname)) {
             throw new RestRuntimeException("手机号或昵称不可用");
@@ -72,7 +72,9 @@ public class UserServiceImpl implements UserService {
         if (i != 1) {
             throw new RestRuntimeException("注册失败");
         }
-        return newUser;
+
+        login(deviceType, pushId, newUser.getId());
+        return login(phoneNumber, deviceType, pushId);
     }
 
     /**
@@ -93,14 +95,7 @@ public class UserServiceImpl implements UserService {
             throw new RestRuntimeException("用户已被冻结");
         }
 
-        // 设备推送ID注册
-        JSONObject pushInfo = new JSONObject();
-        pushInfo.put("type", deviceType.name());
-        pushInfo.put("pushId", pushId);
-        stringRedisTemplate.opsForHash().put(values.redisKeys.devicePushInfoKey, user.getId(), JSON.toJSONString(pushInfo));
-        // 生成身份令牌
-        String userToken = tokenService.genUserToken(user.getId(), RequestThreadLocal.getImei());
-        RequestThreadLocal.setToken(userToken);
+        login(deviceType, pushId, user.getId());
         return user;
     }
 
@@ -112,6 +107,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout(@NotNull String token) {
         tokenService.invalidToken(token);
+    }
+
+    /**
+     * 实际的登陆行为
+     */
+    private void login(@NotNull DeviceTypeEnum deviceType, @NotNull String pushId, String userId) {
+        // 设备推送ID注册
+        JSONObject pushInfo = new JSONObject();
+        pushInfo.put("type", deviceType.name());
+        pushInfo.put("pushId", pushId);
+        stringRedisTemplate.opsForHash().put(values.redisKeys.devicePushInfoKey, userId, JSON.toJSONString(pushInfo));
+        // 生成身份令牌
+        String userToken = tokenService.genUserToken(userId, RequestThreadLocal.getImei());
+        RequestThreadLocal.setToken(userToken);
     }
 
 }
