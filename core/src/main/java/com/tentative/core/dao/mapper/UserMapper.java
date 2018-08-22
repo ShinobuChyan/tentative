@@ -42,6 +42,15 @@ public interface UserMapper extends BaseMapper<User> {
      * @param id 用户ID
      * @return user
      */
-    @Nullable User selectAvailableById(String id);
+    @Nullable
+    User selectAvailableById(@Param("id") String id);
 
+    /**
+     * （在非逻辑删除的数据中）根据手机号查询
+     *
+     * @param phoneNumber 手机号
+     * @return user
+     */
+    @Nullable
+    User selectAvailableByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 }

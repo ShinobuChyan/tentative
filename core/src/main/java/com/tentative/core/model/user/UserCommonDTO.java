@@ -1,6 +1,7 @@
 package com.tentative.core.model.user;
 
 import com.alibaba.fastjson.JSON;
+import com.tentative.common.enums.DeviceTypeEnum;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -36,6 +37,17 @@ public class UserCommonDTO {
 
     @Size(max = 64)
     private String captcha;
+
+    /**
+     * 设备类型
+     */
+    private DeviceTypeEnum deviceType;
+
+    /**
+     * 设备消息推送ID
+     */
+    @Size(max = 250)
+    private String pushId;
 
     @Override
     public String toString() {
@@ -112,5 +124,21 @@ public class UserCommonDTO {
 
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+    public DeviceTypeEnum getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(DeviceTypeEnum deviceType) {
+        this.deviceType = deviceType;
     }
 }

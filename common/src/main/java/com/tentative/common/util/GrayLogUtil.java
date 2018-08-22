@@ -22,6 +22,16 @@ public class GrayLogUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GrayLogUtil.class);
 
+    /**
+     * GELF日志主题 - 接口访问日志
+     */
+    public final static String TOPIC_ACCESS_LOG = "accessLog";
+
+    /**
+     * GELF日志主题 - 访问拒绝日志
+     */
+    public final static String TOPIC_ACCESS_DENIED_LOG = "accessDeniedLog";
+
     private static InetAddress address;
 
     private static Integer port;
@@ -39,24 +49,14 @@ public class GrayLogUtil {
     }
 
     /**
-     * 新增登陆日志
+     * 通用GELF日志
+     *
+     * @param topic       日志主题
+     * @param extraParams 额外数据
      */
-    public static void newLoginLog(Map<String, Object> extraParams) {
+    public static void newDefaultLog(String topic, Map<String, Object> extraParams) {
         try {
-            Map<String, Object> basicParams = basicParams("loginLog");
-            appendParams(basicParams, extraParams);
-            send(basicParams);
-        } catch (Exception e) {
-            LOGGER.error("[GrayLog] -> newLoginLog error.", e);
-        }
-    }
-
-    /**
-     * 新增接口访问日志
-     */
-    public static void newAccessLog(Map<String, Object> extraParams) {
-        try {
-            Map<String, Object> basicParams = basicParams("accessLog");
+            Map<String, Object> basicParams = basicParams(topic);
             appendParams(basicParams, extraParams);
             send(basicParams);
         } catch (Exception e) {

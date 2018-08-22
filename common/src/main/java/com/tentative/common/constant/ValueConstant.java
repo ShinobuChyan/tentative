@@ -16,6 +16,6 @@ public class ValueConstant {
     /**
      * http请求头参数名称 - 用户身份token
      */
-    public final static String REQUEST_HEADER_NAME_USER_TOKEN = "tentative-token";
+    public final static String REQUEST_HEADER_NAME_USER_TOKEN = "tentative-user-token";
 
 }

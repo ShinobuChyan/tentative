@@ -50,10 +50,10 @@ public interface TokenService {
 
     /**
      * 使token失效
+     *
      * @param token token
-     * @return 是否成功
      */
-    boolean invalidToken(String token);
+    void invalidToken(String token);
 
     /**
      * 续签token

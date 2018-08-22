@@ -20,7 +20,8 @@ public class RequestThreadLocal {
     /**
      * 初始化
      *
-     * @param url    请求url
+     * @param url 请求url
+     * @param ip  请求ip
      */
     public static void init(@NotNull String url, @NotNull String ip) {
         if (INFO.get() != null) {
@@ -28,6 +29,7 @@ public class RequestThreadLocal {
         }
         LinkedHashMap<String, Object> infoMap = new LinkedHashMap<>(32);
         infoMap.put("url", url);
+        infoMap.put("ip", ip);
         INFO.set(infoMap);
     }
 

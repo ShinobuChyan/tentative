@@ -95,12 +95,12 @@ public class TokenInterceptor implements HandlerInterceptor {
         try {
             Claims claims = tokenService.decodeToken(token);
             if (claims.getExpiration().getTime() - now <= RENEW_LEFT_TIME) {
-                String newToken = tokenService.renewToken(token, new Date(now + TokenServiceImpl.DEFAULT_TOKEN_EXP));
-                response.setHeader(ValueConstant.REQUEST_HEADER_NAME_USER_TOKEN, newToken);
+                token = tokenService.renewToken(token, new Date(now + TokenServiceImpl.DEFAULT_TOKEN_EXP));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        response.setHeader(ValueConstant.REQUEST_HEADER_NAME_USER_TOKEN, token);
     }
 
     @Override

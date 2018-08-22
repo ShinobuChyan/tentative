@@ -62,4 +62,12 @@
         and data_status = '0'
     </select>
 
+    <select id="selectAvailableByPhoneNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where phone_number = #{phoneNumber}
+        and data_status = '0'
+    </select>
+
 </mapper>

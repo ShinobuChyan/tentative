@@ -72,3 +72,6 @@ customized:
     captcha:
       mobile:
         common: "Tentative:Captcha:Mobile:Common:"
+    # 移动设备相关
+    mobile:
+      push-info: "Tentative:Mobile:PushInfo:"

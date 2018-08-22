@@ -34,6 +34,6 @@ public interface MobileCaptchaService {
      * @param phoneNumber 手机号
      * @param captcha     验证码
      */
-    void consumeCommonCaptcha(@NotNull String phoneNumber, @NotNull String captcha) throws RuntimeException;
+    void consumeCommonCaptcha(@NotNull String phoneNumber, @NotNull String captcha);
 
 }

@@ -1,6 +1,7 @@
 package com.tentative.api.controller.user;
 
 import com.tentative.common.model.CommonResult;
+import com.tentative.common.util.RequestThreadLocal;
 import com.tentative.core.entity.User;
 import com.tentative.core.model.user.UserCommonDTO;
 import com.tentative.common.util.Assert;
@@ -53,7 +54,20 @@ public class UserController {
      */
     @PostMapping("/login/captcha")
     public CommonResult loginByCaptcha(@RequestBody @Validated UserCommonDTO dto) {
-        return null;
+        Assert.notNull(dto.getPhoneNumber(), dto.getCaptcha(), dto.getDeviceType(), dto.getPushId());
+        mobileCaptchaService.consumeCommonCaptcha(dto.getPhoneNumber(), dto.getCaptcha());
+        User user = userService.login(dto.getPhoneNumber(), dto.getDeviceType(), dto.getPushId());
+        return CommonResult.newSuccessResult("登录成功", user.desensitization(), null);
+    }
+
+    /**
+     * 登出
+     */
+    @GetMapping("/logout")
+    public CommonResult logout() {
+        Assert.notNull(RequestThreadLocal.getToken());
+        userService.logout(RequestThreadLocal.getToken());
+        return CommonResult.newSuccessResult("登出成功", null, null);
     }
 
 }

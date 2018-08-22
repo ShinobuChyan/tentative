@@ -34,15 +34,16 @@ public class ControllerAdviser {
 
         // 访问拒绝
         if (e instanceof RequestRefusedException) {
-            LOGGER.warn("[访问拒绝] info: " + RequestThreadLocal.stringDetail());
-            LOGGER.warn("[访问拒绝] msg : " + e.getMessage());
+            LOGGER.warn("[访问拒绝] msg : " + e.getMessage() + ", info: " + RequestThreadLocal.stringDetail());
             return CommonResult.newFailedResult(e.getMessage(), null, CommonResultCode.FORBIDDEN);
         }
+
         // 断言失败
         if (e instanceof AssertFailedException) {
             LOGGER.warn("[断言失败] msg: " + e.getMessage());
             return CommonResult.newFailedResult(e.getMessage(), null, CommonResultCode.BAD_REQUEST);
         }
+
         // api入参校验失败
         if (e instanceof MethodArgumentNotValidException) {
             List<String> errorMsg = ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors().stream()
@@ -51,10 +52,12 @@ public class ControllerAdviser {
             LOGGER.warn("[api入参校验失败] msg: " + errorMsg);
             return CommonResult.newFailedResult("参数校验失败", errorMsg, CommonResultCode.BAD_REQUEST);
         }
+
         // 业务控制抛错
         if (e instanceof RestRuntimeException) {
             return CommonResult.newFailedResult(e.getMessage(), ((RestRuntimeException) e).getData(), null);
         }
+
         // Redis连接超时
         if (e instanceof RedisConnectionFailureException) {
             LOGGER.warn("[Redis连接超时]: " + e.getMessage());

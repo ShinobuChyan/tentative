@@ -112,13 +112,12 @@ public class TokenServiceImpl implements TokenService {
      * 使token失效
      *
      * @param token token
-     * @return 是否成功
      */
     @Override
-    public boolean invalidToken(String token) {
+    public void invalidToken(String token) {
 
         if (isNotAvailable(token)) {
-            return true;
+            return;
         }
 
         Claims tokenClaims = decodeToken(token);
@@ -126,8 +125,6 @@ public class TokenServiceImpl implements TokenService {
         if (timeout > 0) {
             tools.stringRedisTemplate.opsForValue().set(values.redisKeys.inactiveUserTokenKey + token, token, timeout, TimeUnit.MILLISECONDS);
         }
-
-        return true;
     }
 
     /**
