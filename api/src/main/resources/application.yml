@@ -61,7 +61,7 @@ pagehelper:
 
 # 自定义属性
 customized:
-  url-white-list: /reg/captcha,/login/captcha
+  url-white-list: /reg/captcha,/login/captcha,/test
   # redis keys
   redis-key:
     # 用户令牌

@@ -21,6 +21,5 @@ public class UserServiceTest {
 
     @Test
     public void regByCaptcha() {
-        userService.regByCaptcha("333", "333");
     }
 }
